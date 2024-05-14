@@ -1,0 +1,91 @@
+﻿@page
+@model WebSBazom.Pages.Osobe.UpdateModel
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Uredi osobu</h1>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Osoba.Id" />
+
+    <div class="row">
+        <div class="col-sm-6 form-group">
+            <label>Ime</label>
+            <input type="text" asp-for="Osoba.Ime" class="form-control" />
+        </div>
+        <div class="col-sm-6 form-group">
+            <label>Prezime</label>
+            <input type="text" asp-for="Osoba.Prezime" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4 form-group">
+            <label>Godište</label>
+            <input type="number" step="1" asp-for="Osoba.Godiste" class="form-control" />
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>Težina (kg)</label>
+            <input type="number" step="0.01" asp-for="Osoba.Tezina" class="form-control" />
+        </div>
+        <div class="col-sm-4 form-group">
+            <label>Visina (cm)</label>
+            <input type="number" step="1" asp-for="Osoba.Visina" class="form-control" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Spremi
+    </button>
+</form>
+
+<h2>Životinje u vlasništvu</h2>
+
+<div class="row">
+    <tr class="col">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Ime</th>
+                    <th>Vrsta</th>
+                    <th>Akcije</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var zivotinja in Model.Zivotinje)
+                {
+                    <tr>
+                        <td>@zivotinja.Ime</td>
+                        <td>@zivotinja.Vrsta</td>
+                        <td>
+                            <a class="btn btn-info" asp-page="/Zivotinje/Update" asp-route-id="@zivotinja.Id">
+                                Uredi
+                            </a>
+                            <a class="btn btn-danger" asp-page="/Zivotinje/Delete" asp-route-id="@zivotinja.Id">
+                                Izbriši
+                            </a>
+                        </td>
+                    </tr>
+                }
+                
+                @if (Model.Zivotinje.Count == 0)
+                {
+                    <tr>
+                        <td colspan="3" class="text-center">
+                            Osoba nema nijednu životinju...
+                        </td>
+                    </tr>
+                }
+                
+                <tr>
+                    <td colspan="3" class="text-center">
+                        <a class="btn btn-success" asp-page="/Zivotinje/Add" asp-route-vlasnikId="@Model.Osoba.Id">
+                            Dodaj životinju
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</div>

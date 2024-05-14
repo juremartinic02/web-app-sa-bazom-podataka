@@ -1,0 +1,66 @@
+﻿@page
+@model WebSBazom.Pages.Osobe.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Osobe</h1>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>
+            Ime i prezime
+        </th>
+        <th>
+            Godište
+        </th>
+        <th>
+            Težina
+        </th>
+        <th>
+            Visina
+        </th>
+        <th>
+            Akcije
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var osoba in Model.Osobe)
+    {
+        <tr>
+            <td>
+                @osoba.Ime @osoba.Prezime
+            </td>
+            <td>
+                @(osoba.Godiste)@(osoba.Godiste.HasValue ? "." : "")
+            </td>
+            <td>
+                @osoba.Tezina @(osoba.Tezina.HasValue ? "kg" : "")
+            </td>
+            <td>
+                @osoba.Visina @(osoba.Visina.HasValue ? "cm" : "")
+            </td>
+            <td>
+                <a class="btn btn-info" asp-page="/Osobe/Update" asp-route-id="@osoba.Id">
+                    Uredi
+                </a>
+                <a class="btn btn-danger" asp-page="/Osobe/Delete" asp-route-id="@osoba.Id">
+                    Izbriši
+                </a>
+            </td>
+        </tr>
+    }
+
+    <tr>
+        <td colspan="5" class="text-center">
+            <a asp-page="/Osobe/Add" class="btn btn-success">
+                Dodaj osobu
+            </a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>

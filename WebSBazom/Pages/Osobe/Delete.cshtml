@@ -1,0 +1,25 @@
+﻿@page
+@model WebSBazom.Pages.Osobe.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="text-center">
+    <h1>Brisanje osobe</h1>
+    
+    <p>
+        Želite li izbrisati osobu <b>@(Model.Osoba.Ime) @(Model.Osoba.Prezime)</b>?
+    </p>
+    
+    <div>
+        <a class="btn btn-info" asp-page="/Osobe/Index">
+            Ne, vrati me nazad
+        </a>
+        
+        <form method="post" class="d-inline-block">
+            <button type="submit" class="btn btn-danger">
+                Da, briši!
+            </button>
+        </form>
+    </div>
+</div>

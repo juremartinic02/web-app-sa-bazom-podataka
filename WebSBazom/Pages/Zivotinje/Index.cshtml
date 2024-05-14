@@ -1,0 +1,47 @@
+﻿@page
+@model WebSBazom.Pages.Zivotinje.IndexModel
+@{
+    ViewData["Title"] = "Zivotinje";
+}
+
+<h1>Zivotinje</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ime</th>
+            <th>Vrsta</th>
+            <th>Pasmina</th>
+            <th>Tezina</th>
+            <th>Vlasnik</th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var zivotinja in Model.Zivotinje)
+        {
+        <tr>
+            <td>@zivotinja.Ime</td>
+            <td>@zivotinja.Vrsta</td>
+            <td>@zivotinja.Pasmina</td>
+            <td>@zivotinja.Tezina</td>
+            <td></td>
+            <td>
+                <a class="btn btn-info" asp-page="/Zivotinje/Update" asp-route-id="@zivotinja.Id">
+                    Uredi
+                </a>
+                <a class="btn btn-danger" asp-page="/Zivotinje/Delete" asp-route-id="@zivotinja.Id">
+                    Izbriši
+                </a>
+            </td>
+        </tr>
+        }
+    <tr>
+        <td colspan="6" class="text-center">
+            <a class="btn btn-success" asp-page="/Zivotinje/Add">
+                Dodaj životinju
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
